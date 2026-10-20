@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Form Validator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Create an account</h1>
+
+    <form id="signup-form" >
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name">
+        <p class="error" id="name-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="name123@gmail.com">
+        <p class="error" id="email-error"></p>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 8 characters">
+        <p class="error" id="password-error"></p>
+      </div>
+
+      <button type="submit">Sign up</button>
+      <p class="success" id="success-message"></p>
+    </form>
+  </main>
+
+  <script >
+    const form = document.getElementById("signup-form");
+
+    form.addEventListener("submit", function (event) {
+      
+      event.preventDefault();
+
+      
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      
+      const nameError = document.getElementById("name-error");
+      const emailError = document.getElementById("email-error");
+      const passwordError = document.getElementById("password-error");
+      const successMessage = document.getElementById("success-message");
+
+      
+      nameError.textContent = "";
+      emailError.textContent = "";
+      passwordError.textContent = "";
+      successMessage.textContent = "";
+
+      let isValid = true;
+
+      if (name.length < 3) {
+        nameError.textContent = "Name must be at least 3 characters.";
+        isValid = false;
+      }
+
+      if (!email.includes("@")) {
+        emailError.textContent = "Email must contain @.";
+        isValid = false;
+      }
+
+      if (password.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        successMessage.textContent = "Success! Your account has been created.";
+      }
+    });
+    
+  </script>
+</body>
+</html>
